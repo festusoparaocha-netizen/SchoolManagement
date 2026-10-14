@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -70,10 +69,10 @@ model User {
   teacherProfile Teacher?
   parentProfile  Parent?
 
-  recordedAttendance Attendance[] @relation("AttendanceRecorder")
-  enteredResults     Result[]     @relation("ResultRecorder")
+  recordedAttendance    Attendance[]   @relation("AttendanceRecorder")
+  enteredResults        Result[]       @relation("ResultRecorder")
   authoredAnnouncements Announcement[] @relation("AnnouncementAuthor")
-  auditLogs          AuditLog[]   @relation("AuditActor")
+  auditLogs             AuditLog[]     @relation("AuditActor")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,14 +81,14 @@ model User {
 }
 
 model Student {
-  id              String   @id @default(uuid())
-  userId          String?  @unique
-  admissionNumber String   @unique
+  id              String    @id @default(uuid())
+  userId          String?   @unique
+  admissionNumber String    @unique
   dateOfBirth     DateTime?
   gender          String?
   address         String?
 
-  user        User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  user        User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   parentLinks ParentStudent[]
   enrollments ClassEnrollment[]
   attendance  Attendance[]
@@ -100,13 +99,13 @@ model Student {
 }
 
 model Teacher {
-  id          String   @id @default(uuid())
-  userId      String?  @unique
-  staffNumber String   @unique
-  qualification String?
+  id             String    @id @default(uuid())
+  userId         String?   @unique
+  staffNumber    String    @unique
+  qualification  String?
   employmentDate DateTime?
 
-  user        User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  user        User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
   assignments TeacherAssignment[]
 
   createdAt DateTime @default(now())
@@ -114,19 +113,19 @@ model Teacher {
 }
 
 model Parent {
-  id     String  @id @default(uuid())
-  userId String? @unique
+  id         String  @id @default(uuid())
+  userId     String? @unique
   occupation String?
 
-  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
-  children     ParentStudent[]
+  user     User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  children ParentStudent[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model ParentStudent {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   parentId  String
   studentId String
   relation  String?
@@ -146,10 +145,10 @@ model SchoolClass {
   level       String?
   description String?
 
-  enrollments  ClassEnrollment[]
-  assignments  TeacherAssignment[]
-  assessments  Assessment[]
-  attendance   Attendance[]
+  enrollments   ClassEnrollment[]
+  assignments   TeacherAssignment[]
+  assessments   Assessment[]
+  attendance    Attendance[]
   announcements Announcement[]
 
   createdAt DateTime @default(now())
@@ -178,10 +177,10 @@ model AcademicSession {
   endDate   DateTime
   isCurrent Boolean  @default(false)
 
-  enrollments  ClassEnrollment[]
-  assignments  TeacherAssignment[]
-  assessments  Assessment[]
-  attendance   Attendance[]
+  enrollments ClassEnrollment[]
+  assignments TeacherAssignment[]
+  assessments Assessment[]
+  attendance  Attendance[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -195,8 +194,8 @@ model ClassEnrollment {
   schoolClassId     String
   academicSessionId String
 
-  student        Student        @relation(fields: [studentId], references: [id], onDelete: Restrict)
-  schoolClass    SchoolClass    @relation(fields: [schoolClassId], references: [id], onDelete: Restrict)
+  student         Student         @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  schoolClass     SchoolClass     @relation(fields: [schoolClassId], references: [id], onDelete: Restrict)
   academicSession AcademicSession @relation(fields: [academicSessionId], references: [id], onDelete: Restrict)
 
   createdAt DateTime @default(now())
@@ -270,14 +269,14 @@ model Assessment {
 }
 
 model Result {
-  id            String       @id @default(uuid())
-  studentId     String
-  assessmentId  String
-  enteredById   String
-  score         Decimal      @db.Decimal(7, 2)
-  grade         String?
-  status        ResultStatus @default(DRAFT)
-  remarks       String?
+  id           String       @id @default(uuid())
+  studentId    String
+  assessmentId String
+  enteredById  String
+  score        Decimal      @db.Decimal(7, 2)
+  grade        String?
+  status       ResultStatus @default(DRAFT)
+  remarks      String?
 
   student    Student    @relation(fields: [studentId], references: [id], onDelete: Restrict)
   assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Restrict)
@@ -291,7 +290,7 @@ model Result {
 }
 
 model Announcement {
-  id          String              @id @default(uuid())
+  id          String               @id @default(uuid())
   title       String
   content     String
   audience    AnnouncementAudience @default(ALL)
