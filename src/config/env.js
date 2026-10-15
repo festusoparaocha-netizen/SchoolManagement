@@ -1,4 +1,4 @@
-import "dotenv.config";
+import "dotenv/config";
 import z from "zod";
 
 const envSchema = z.object({
@@ -6,7 +6,8 @@ const envSchema = z.object({
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
     JWT_SECRET: z.string().min(32, "JWT_SECRET must be at least 32 characters long"),
-    JWT_EXPIRES_IN: z.string().default("1d")
+    JWT_EXPIRES_IN: z.string().default("1d"),
+    FRONTEND_URL: z.string().url().default("http://localhost:3000")
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
