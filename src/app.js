@@ -6,7 +6,8 @@ import {env} from "./config/env.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
-
+import studentRoutes from "./routes/studentRoutes.js";
+import teacherRoutes from "./routes/teacherRoutes.js";
 
 
 const app = express();
@@ -22,8 +23,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
-
-
+app.use("/api/v1/students", studentRoutes);
+app.use("/api/v1/teachers", teacherRoutes);
 
 
 app.get("/api/v1/health", (req, res) => {
