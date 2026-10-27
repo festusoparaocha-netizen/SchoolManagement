@@ -87,6 +87,7 @@ model Student {
   dateOfBirth     DateTime?
   gender          String?
   address         String?
+  status UserStatus @default(ACTIVE)
 
   user        User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   parentLinks ParentStudent[]
@@ -104,6 +105,7 @@ model Teacher {
   staffNumber    String    @unique
   qualification  String?
   employmentDate DateTime?
+  status UserStatus @default(ACTIVE)
 
   user        User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
   assignments TeacherAssignment[]
@@ -144,6 +146,7 @@ model SchoolClass {
   name        String
   level       String?
   description String?
+  status      UserStatus @default(ACTIVE)
 
   enrollments   ClassEnrollment[]
   assignments   TeacherAssignment[]
