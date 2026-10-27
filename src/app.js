@@ -5,7 +5,7 @@ import {env} from "./config/env.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-
+import classRoutes from "./routes/classRoutes.js";
 
 
 
@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
-
+app.use("/api/v1/classes", classRoutes);
 
 
 
