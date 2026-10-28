@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 
 import studentRoutes from "./routes/studentRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
+import academicSessionRoutes from "./routes/academicSessionRoutes.js";
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
+app.use("/api/v1/academic-sessions", academicSessionRoutes);
 
 
 app.get("/api/v1/health", (req, res) => {
