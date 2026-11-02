@@ -14,6 +14,8 @@ import subjectRoutes from "./routes/subjectRoutes.js";
 import enrollmentRoutes from "./routes/enrollmentRoutes.js";
 
 
+import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
+
 
 const app = express();
 
