@@ -11,6 +11,9 @@ import teacherRoutes from "./routes/teacherRoutes.js";
 import academicSessionRoutes from "./routes/academicSessionRoutes.js";
 import subjectRoutes from "./routes/subjectRoutes.js";
 
+import enrollmentRoutes from "./routes/enrollmentRoutes.js";
+
+
 
 const app = express();
 
