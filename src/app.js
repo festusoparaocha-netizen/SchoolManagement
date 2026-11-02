@@ -8,6 +8,13 @@ import userRoutes from "./routes/userRoutes.js";
 
 import studentRoutes from "./routes/studentRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
+import academicSessionRoutes from "./routes/academicSessionRoutes.js";
+import subjectRoutes from "./routes/subjectRoutes.js";
+
+import enrollmentRoutes from "./routes/enrollmentRoutes.js";
+
+
+import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
 
 import attendanceRoutes from "./routes/attendanceRoutes.js";
 
