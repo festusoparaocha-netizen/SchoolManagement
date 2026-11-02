@@ -8,6 +8,11 @@ import userRoutes from "./routes/userRoutes.js";
 
 import studentRoutes from "./routes/studentRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
+import academicSessionRoutes from "./routes/academicSessionRoutes.js";
+import subjectRoutes from "./routes/subjectRoutes.js";
+
+import enrollmentRoutes from "./routes/enrollmentRoutes.js";
+
 
 import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
 
@@ -27,7 +32,10 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
-app.use("/api/v1/teacher-assignments", teacherAssignmentRoutes);
+app.use("/api/v1/academic-sessions", academicSessionRoutes);
+app.use("/api/v1/subjects", subjectRoutes);
+
+
 
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
