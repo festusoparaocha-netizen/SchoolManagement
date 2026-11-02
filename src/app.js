@@ -12,12 +12,8 @@ import academicSessionRoutes from "./routes/academicSessionRoutes.js";
 import subjectRoutes from "./routes/subjectRoutes.js";
 
 import enrollmentRoutes from "./routes/enrollmentRoutes.js";
-
-
 import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
-
 import attendanceRoutes from "./routes/attendanceRoutes.js";
-
 import assessmentRoutes from "./routes/assessmentRoutes.js";
 import resultRoutes from "./routes/resultRoutes.js";
 
@@ -37,13 +33,18 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
+
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
+app.use("/api/v1/academic-sessions", academicSessionRoutes);
+app.use("/api/v1/subjects", subjectRoutes);
+
+app.use("/api/v1/enrollments", enrollmentRoutes);
+app.use("/api/v1/teacher-assignments", teacherAssignmentRoutes);
+app.use("/api/v1/attendance", attendanceRoutes);
 app.use("/api/v1/assessments", assessmentRoutes);
 app.use("/api/v1/results", resultRoutes);
 
-
-app.use("/api/v1/attendance", attendanceRoutes);
 
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
