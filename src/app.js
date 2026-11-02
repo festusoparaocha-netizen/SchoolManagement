@@ -16,6 +16,8 @@ import enrollmentRoutes from "./routes/enrollmentRoutes.js";
 
 import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
 
+import attendanceRoutes from "./routes/attendanceRoutes.js";
+
 
 const app = express();
 
@@ -32,10 +34,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
-app.use("/api/v1/academic-sessions", academicSessionRoutes);
-app.use("/api/v1/subjects", subjectRoutes);
-
-
+app.use("/api/v1/attendance", attendanceRoutes);
 
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
