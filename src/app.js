@@ -9,6 +9,8 @@ import userRoutes from "./routes/userRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
 
+import attendanceRoutes from "./routes/attendanceRoutes.js";
+
 
 const app = express();
 
@@ -25,7 +27,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
-
+app.use("/api/v1/attendance", attendanceRoutes);
 
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
