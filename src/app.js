@@ -18,6 +18,11 @@ import teacherAssignmentRoutes from "./routes/teacherAssignmentRoutes.js";
 
 import attendanceRoutes from "./routes/attendanceRoutes.js";
 
+import assessmentRoutes from "./routes/assessmentRoutes.js";
+import resultRoutes from "./routes/resultRoutes.js";
+
+
+
 
 const app = express();
 
@@ -34,6 +39,10 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/teachers", teacherRoutes);
+app.use("/api/v1/assessments", assessmentRoutes);
+app.use("/api/v1/results", resultRoutes);
+
+
 app.use("/api/v1/attendance", attendanceRoutes);
 
 app.get("/api/v1/health", (req, res) => {
