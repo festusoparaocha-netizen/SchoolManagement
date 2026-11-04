@@ -56,6 +56,12 @@ enum AnnouncementStatus {
   ARCHIVED
 }
 
+enum ReportCardStatus {
+  DRAFT
+  APPROVED
+  PUBLISHED
+}
+
 model User {
   id           String     @id @default(uuid())
   fullName     String
@@ -94,6 +100,7 @@ model Student {
   enrollments ClassEnrollment[]
   attendance  Attendance[]
   results     Result[]
+  reportCards ReportCard[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -109,6 +116,7 @@ model Teacher {
 
   user        User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
   assignments TeacherAssignment[]
+  reportCardComments ReportCardSubject[] @relation("SubjectReportCommenter")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -146,12 +154,14 @@ model SchoolClass {
   name        String
   level       String?
   description String?
+  status UserStatus @default(ACTIVE)
 
   enrollments   ClassEnrollment[]
   assignments   TeacherAssignment[]
   assessments   Assessment[]
   attendance    Attendance[]
   announcements Announcement[]
+  reportCards ReportCard[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -167,6 +177,7 @@ model Subject {
 
   assignments TeacherAssignment[]
   assessments Assessment[]
+  reportCardSubjects ReportCardSubject[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -183,6 +194,7 @@ model AcademicSession {
   assignments TeacherAssignment[]
   assessments Assessment[]
   attendance  Attendance[]
+  reportCards ReportCard[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -325,4 +337,63 @@ model AuditLog {
 
   @@index([actorId, createdAt])
   @@index([entity, entityId])
+}
+
+model ReportCard {
+  id                String @id @default(uuid())
+  studentId         String
+  schoolClassId     String
+  academicSessionId String
+  term              Int
+
+  totalScore        Decimal @default(0) @db.Decimal(9, 2)
+  maximumScore      Decimal @default(0) @db.Decimal(9, 2)
+  average           Decimal @default(0) @db.Decimal(5, 2)
+  position          Int?
+
+  teacherComment    String?
+  administratorRemark String?
+
+  status            ReportCardStatus @default(DRAFT)
+  generatedAt       DateTime @default(now())
+  publishedAt      DateTime?
+
+  student         Student         @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  schoolClass     SchoolClass     @relation(fields: [schoolClassId], references: [id], onDelete: Restrict)
+  academicSession AcademicSession @relation(fields: [academicSessionId], references: [id], onDelete: Restrict)
+
+  subjects ReportCardSubject[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, schoolClassId, academicSessionId, term])
+  @@index([schoolClassId, academicSessionId, term])
+  @@index([studentId, academicSessionId, term])
+  @@index([status])
+}
+
+model ReportCardSubject {
+  id           String @id @default(uuid())
+  reportCardId String
+  subjectId    String
+
+  totalScore   Decimal @default(0) @db.Decimal(9, 2)
+  maximumScore Decimal @default(0) @db.Decimal(9, 2)
+  average      Decimal @default(0) @db.Decimal(5, 2)
+  grade        String?
+
+  teacherComment       String?
+  commentedByTeacherId String?
+
+  reportCard ReportCard @relation(fields: [reportCardId], references: [id], onDelete: Cascade)
+  subject    Subject    @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+
+  commentedByTeacher Teacher? @relation("SubjectReportCommenter", fields: [commentedByTeacherId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([reportCardId, subjectId])
+  @@index([subjectId])
 }
