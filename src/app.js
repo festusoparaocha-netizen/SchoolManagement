@@ -17,6 +17,7 @@ import attendanceRoutes from "./routes/attendanceRoutes.js";
 import assessmentRoutes from "./routes/assessmentRoutes.js";
 import resultRoutes from "./routes/resultRoutes.js";
 
+import reportCardRoutes from "./routes/reportCardRoutes.js";
 
 
 
@@ -44,6 +45,8 @@ app.use("/api/v1/teacher-assignments", teacherAssignmentRoutes);
 app.use("/api/v1/attendance", attendanceRoutes);
 app.use("/api/v1/assessments", assessmentRoutes);
 app.use("/api/v1/results", resultRoutes);
+
+app.use("/api/v1/report-cards", reportCardRoutes);
 
 
 app.get("/api/v1/health", (req, res) => {
